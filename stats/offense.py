@@ -4,11 +4,12 @@ import matplotlib.pyplot as plt
 
 from data import games
 
-plays: pd.DataFrame = games[games['type'] == 'play']
+plays = games[games['type'] == 'play']
 plays.columns = ['type', 'inning', 'team', 'player', 'count', 'pitches', 'event', 'game_id', 'year' ]
-hits: pd.DataFrame = plays.loc[plays['event'].str.contains('^(?:S(?!B)|D|T|HR)'), ['inning', 'event']]
+hits = plays.loc[plays['event'].str.contains('^(?:S(?!B)|D|T|HR)'), ['inning', 'event']]
 hits.loc[:, 'inning'] = pd.to_numeric(hits.loc[:, 'inning'])
-replacements: dict = {
+
+replacements = {
     r'^S(.*)': 'single',
     r'^D(.*)': 'double',
     r'^T(.*)': 'triple',
